@@ -13,6 +13,30 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 - 可实现实时音频流处理：
      - 输入/输出延迟约为100ms
      - 实时处理44.1kHz/16bit的立体声，需要133Mhz英特尔奔腾处理器或更好
+
+## SoundTouch公开函数与参数的说明
+### 采样：
+- setChannels(int) 设置声道，1 = mono单声道, 2 = stereo立体声
+- setSampleRate(uint) 设置采样率
+### 速率：
+
+- setRate(double) 指定播放速率，原始值为1.0，大快小慢
+- setTempo(double) 指定节拍，原始值为1.0，大快小慢
+- setRateChange(double)、setTempoChange(double) 在原速1.0基础上，按百分比做增量，取值(-50 .. +100 %)
+### 音调：
+
+- setPitch(double) 指定音调值，原始值为1.0
+- setPitchOctaves(double) 在原音调基础上以八度音为单位进行调整，取值为[-1.00,+1.00]
+- setPitchSemiTones(int) 在原音调基础上以半音为单位进行调整，取值为[-12,+12]
+
+以上调音函数根据乐理进行单位换算，最后进入相同的处理流程calcEffectiveRateAndTempo()。三个函数对参数没有上下界限限制，只是参数过大失真越大。SemiTone指半音，通常说的“降1个key”就是降低1个半音。所以我认为使用SemiTone为单位即可满足需求，并且容易理解。
+
+### 处理：
+
+- putSamples(const SAMPLETYPE *samples, uint nSamples) 输入采样数据
+- receiveSamples(SAMPLETYPE *output, uint maxSamples) 输出处理后的数据，需要循环执行
+- flush() 冲出处理管道中的最后一组“残留”的数据，应在最后执行
+
 ## 相关链接
 官网提供了ST的可执行程序、C++源码、说明文档、不同操作系统的示例工程，几个重要链接：
 - [SoundTouch官网](https://www.surina.net/soundtouch/)
@@ -76,19 +100,6 @@ add_library(
         SHARED
         ${LIB_DIRSRCS_SOH})
 ```
-## SoundTouch公开函数与参数的说明
-### 采样：
-- setChannels(int) 设置声道，1 = mono单声道, 2 = stereo立体声
-- setSampleRate(uint) 设置采样率
-### 速率：
 
-- setRate(double) 指定播放速率，原始值为1.0，大快小慢
-- setTempo(double) 指定节拍，原始值为1.0，大快小慢
-- setRateChange(double)、setTempoChange(double) 在原速1.0基础上，按百分比做增量，取值(-50 .. +100 %)
-### 音调：
-
-- setPitch(double) 指定音调值，原始值为1.0
-- setPitchOctaves(double) 在原音调基础上以八度音为单位进行调整，取值为[-1.00,+1.00]
-- setPitchSemiTones(int) 在原音调基础上以半音为单位进行调整，取值为[-12,+12]
 
   
