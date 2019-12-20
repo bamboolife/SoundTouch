@@ -24,3 +24,9 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
   目录结构
   ![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/soundtouch_dir1.png)
   ![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/soundtouch_dir2.png)
+2. 最关键的就是 include和source两个文件夹，包含需要编译的头文件和源码。需要把include、source中SoundStretch和SoundTouch三个文件夹导入Android c++工程中。
+3. 创建Android c++工程（目录结构如下）
+ ![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/project_dir.png)
+
+
+  
