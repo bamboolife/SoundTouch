@@ -28,6 +28,7 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 3. 创建Android c++工程（目录结构如下）
  ![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/project_dir.png)
 4. 编写CMake
+
 cpp目录下的CMakeLists.txt
 ```
 cmake_minimum_required(VERSION 3.4.1)
