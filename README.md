@@ -22,4 +22,4 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 ## Android中使用SoundTouch
 1. 上官网下载源码
   目录结构
-  
+  ![image](https://github.com/bamboolife/BBLComponentFrame/blob/master/images/系统架构设计.png)
