@@ -27,6 +27,54 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 2. 最关键的就是 include和source两个文件夹，包含需要编译的头文件和源码。需要把include、source中SoundStretch和SoundTouch三个文件夹导入Android c++工程中。
 3. 创建Android c++工程（目录结构如下）
  ![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/project_dir.png)
+4. 编写CMake
+cpp目录下的CMakeLists.txt
+```
+cmake_minimum_required(VERSION 3.4.1)
+#添加头文件
+include_directories(include SoundStretch SoundStretch)
+#添加源码
+AUX_SOURCE_DIRECTORY(. DIRSRCS)
+AUX_SOURCE_DIRECTORY(SoundStretch SSH)
+AUX_SOURCE_DIRECTORY(SoundTouch STH)
+#增加其他目录的源文件到集合变量中
+list(APPEND DIRSRCS ${SSH} ${STH})
+add_library( 
+        soundtouch
+        SHARED
+        ${DIRSRCS})
+
+find_library( 
+        log-lib
+        log)
+
+target_link_libraries(
+        soundtouch
+        ${log-lib})
+```
+SoundStretch目录下的CMakeLists.txt
+```
+cmake_minimum_required(VERSION 3.4.1)
+#添加源码
+AUX_SOURCE_DIRECTORY(. LIB_DIRSRCS_WAV)
+
+add_library( 
+        wavfile
+        SHARED
+        ${LIB_DIRSRCS})
+```
+SoundTouch目录下的CMakeLists.txt
+```
+cmake_minimum_required(VERSION 3.4.1)
+
+#添加源码
+AUX_SOURCE_DIRECTORY(. LIB_DIRSRCS_SOH)
+
+add_library(
+        sound
+        SHARED
+        ${LIB_DIRSRCS_SOH})
+```
 
 
   
