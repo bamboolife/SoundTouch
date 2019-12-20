@@ -76,6 +76,19 @@ add_library(
         SHARED
         ${LIB_DIRSRCS_SOH})
 ```
+## SoundTouch公开函数与参数的说明
+### 采样：
+- setChannels(int) 设置声道，1 = mono单声道, 2 = stereo立体声
+- setSampleRate(uint) 设置采样率
+### 速率：
 
+- setRate(double) 指定播放速率，原始值为1.0，大快小慢
+- setTempo(double) 指定节拍，原始值为1.0，大快小慢
+- setRateChange(double)、setTempoChange(double) 在原速1.0基础上，按百分比做增量，取值(-50 .. +100 %)
+### 音调：
+
+- setPitch(double) 指定音调值，原始值为1.0
+- setPitchOctaves(double) 在原音调基础上以八度音为单位进行调整，取值为[-1.00,+1.00]
+- setPitchSemiTones(int) 在原音调基础上以半音为单位进行调整，取值为[-12,+12]
 
   
