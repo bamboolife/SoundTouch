@@ -89,9 +89,9 @@ static void _processFile(SoundTouch *pSoundTouch, const char *inFileName, const 
 
     // create output file
     WavOutFile outFile(outFileName, sampleRate, bits, nChannels);
-
-    pSoundTouch->setSampleRate(sampleRate);
-    pSoundTouch->setChannels(nChannels);
+    //采样
+    pSoundTouch->setSampleRate(sampleRate);//设置采样率
+    pSoundTouch->setChannels(nChannels);//设置声道，1 = mono单声道, 2 = stereo立体声
 
     assert(nChannels > 0);
     buffSizeSamples = BUFF_SIZE / nChannels;
@@ -224,4 +224,16 @@ JNIEXPORT void JNICALL
 Java_com_sundy_soundtouch_SoundTouch_deleteInstance(JNIEnv *env, jobject thiz, jlong handle) {
     SoundTouch *ptr=(SoundTouch *)handle;
     delete ptr;
+}extern "C"
+JNIEXPORT void JNICALL
+Java_com_sundy_soundtouch_SoundTouch_setPitch(JNIEnv *env, jobject thiz, jlong handle,
+                                              jfloat pitch) {
+    SoundTouch *ptr=(SoundTouch *)handle;
+     ptr->setPitch(pitch);
+}extern "C"
+JNIEXPORT void JNICALL
+Java_com_sundy_soundtouch_SoundTouch_setPitchOctaves(JNIEnv *env, jobject thiz, jlong handle,
+                                                     jfloat pitch) {
+    SoundTouch *ptr=(SoundTouch *)handle;
+    ptr->setPitchOctaves(pitch);
 }

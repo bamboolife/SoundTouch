@@ -11,24 +11,79 @@
 
 package com.sundy.soundtouch;
 
+import androidx.annotation.FloatRange;
+
 public final class SoundTouch
 {
-    // Native interface function that returns SoundTouch version string.
-    // This invokes the native c++ routine defined in "soundtouch-jni.cpp".
+    /**
+     * 获取SoundTouch版本
+     * @return
+     */
     public native final static String getVersionString();
-    
+     //速率
+
+    /**
+     * 指定节拍，原始值为1.0，大快小慢
+     * @param handle
+     * @param tempo
+     */
     private native final void setTempo(long handle, float tempo);
 
-    private native final void setPitchSemiTones(long handle, float pitch);
-    
+    /**
+     * 指定播放速率，原始值为1.0，大快小慢
+     * @param handle
+     * @param speed
+     */
     private native final void setSpeed(long handle, float speed);
 
+   // 音调：
+
+    /**
+     *在原音调基础上以半音为单位进行调整，取值为[-12.0,+12.0]
+     * @param handle
+     * @param pitch
+     */
+    private native final void setPitchSemiTones(long handle,@FloatRange(from = -12.0,to = 12.0) float pitch);
+
+    /**
+     * 指定音调值，原始值为1.0
+     * @param handle
+     * @param pitch
+     */
+    private native final void setPitch(long handle,float pitch);
+
+    /**
+     * 在原音调基础上以八度音为单位进行调整，取值为[-1.00,+1.00]
+     * @param handle
+     * @param pitch
+     */
+    private native final void setPitchOctaves(long handle,@FloatRange(from = -1.0,to = 1.0) float pitch);
+
+    /**
+     * 指定wav源文件和转化的输出文件
+     * @param handle
+     * @param inputFile
+     * @param outputFile
+     * @return
+     */
     private native final int processFile(long handle, String inputFile, String outputFile);
 
+    /**
+     * 错误信息打印
+     * @return
+     */
     public native final static String getErrorString();
 
+    /**
+     * 实例化SoundTouch对象
+     * @return
+     */
     private native final static long newInstance();
-    
+
+    /**
+     * 销毁SoundTouch对象
+     * @param handle
+     */
     private native final void deleteInstance(long handle);
     
     long handle = 0;
