@@ -37,6 +37,10 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 - receiveSamples(SAMPLETYPE *output, uint maxSamples) 输出处理后的数据，需要循环执行
 - flush() 冲出处理管道中的最后一组“残留”的数据，应在最后执行
 
+### SoundTouch实时处理音频流
+
+ST对音频的处理是输入函数putSamples()与输出函数receiveSamples()。实时处理音频流的思路就是，循环读取音频数据段，放入ST进行输出，输出处理后的数据段用于播放。
+
 ## 相关链接
 官网提供了ST的可执行程序、C++源码、说明文档、不同操作系统的示例工程，几个重要链接：
 - [SoundTouch官网](https://www.surina.net/soundtouch/)
