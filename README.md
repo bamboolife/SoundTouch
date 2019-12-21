@@ -122,6 +122,14 @@ add_library(
 
 看到一个这样的比喻：如果一个声音中从1到20K赫兹频率的波都有，并且都是1:1的关系，即相对强度都相同。这样一个声音就称为白噪音，听起来就和收音机收不信号时的音色一样。如果我有2万只音箱，每一个音箱分别对应放从1到20k赫兹不同频率的声波。那么我通过开关不同的音箱，调节每个音箱的音量，从理论上讲我就可以得到任何我想要的音色。不论是韩红的声音还是孙楠的声音，小提琴的声音。
 
+### A/D转换（Analog-to-Digital Converter）
+样本sample：声波
+→ 采样sampling
+→ 量化quantization：将连续值离散化
+→ 编码coding：可由软件或硬件芯片完成
+→ （压缩compress）：mp3等格式
+→ 二进制1010…10
+
 ### 声音采集
 将模拟信号数字化，分为取样和量化两部分，即通常的 PCM(Pulse-code modulation) 脉冲编码调制技术。
 
@@ -143,10 +151,10 @@ add_library(
  - 声道数：单声道的声音只能使用一个喇叭发声，立体声的pcm可以使两个喇叭都发声，更能感受到空间效果。
 - 声道和立体声
 
-   - Monaural (单声道)
-   - Stereophonic(立体声)
-   - 4.1 Surround Sound(4.1环绕立体声)
-   - 5.1 Surround Sound(5.1环绕立体声)
+   - mono,Monaural (单声道)
+   - stereo,Stereophonic(立体声)
+   - 4.1 Surround Sound(4.1环绕立体声)4.1环绕立体声：左前+右前+左后+右后+低音炮
+   - 5.1 Surround Sound(5.1环绕立体声)5.1环绕立体声，如杜比数字技术：左前+中置+右前+左后环绕+右后环绕+低音炮
 - 音频的几种文件格式
    
     - 不压缩的格式(UnCompressed Audio Format)：PCM数据，wav, aiff
