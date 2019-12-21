@@ -20,14 +20,14 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 - setSampleRate(uint) 设置采样率
 ### 速率：
 
-- setRate(double) 指定播放速率，原始值为1.0，大快小慢
-- setTempo(double) 指定节拍，原始值为1.0，大快小慢
+- setRate(double) 指定播放速率，设置新的rate，源rate=1.0，小于1变慢；大于1变快
+- setTempo(double) 指定节拍，设置新的节拍tempo，源tempo=1.0，小于1则变慢；大于1变快
 - setRateChange(double)、setTempoChange(double) 在原速1.0基础上，按百分比做增量，取值(-50 .. +100 %)
 ### 音调：
 
-- setPitch(double) 指定音调值，原始值为1.0
-- setPitchOctaves(double) 在原音调基础上以八度音为单位进行调整，取值为[-1.00,+1.00]
-- setPitchSemiTones(int) 在原音调基础上以半音为单位进行调整，取值为[-12,+12]
+- setPitch(double) 指定音调值, 源pitch = 1.0，小于1音调变低；大于1音调变高
+- setPitchOctaves(double) 在源pitch的基础上，使用八度音(Octave)设置新的pitch [-1.00, 1.00]。
+- setPitchSemiTones(double) 在源pitch的基础上，使用半音(Semitones)设置新的pitch [-12.0,12.0]
 
 以上调音函数根据乐理进行单位换算，最后进入相同的处理流程calcEffectiveRateAndTempo()。三个函数对参数没有上下界限限制，只是参数过大失真越大。SemiTone指半音，通常说的“降1个key”就是降低1个半音。所以我认为使用SemiTone为单位即可满足需求，并且容易理解。
 
@@ -36,6 +36,17 @@ ST处理的对象是PCM（Pulse Code Modulation，脉冲编码调制），.wav�
 - putSamples(const SAMPLETYPE *samples, uint nSamples) 输入采样数据
 - receiveSamples(SAMPLETYPE *output, uint maxSamples) 输出处理后的数据，需要循环执行
 - flush() 冲出处理管道中的最后一组“残留”的数据，应在最后执行
+
+### 速度和pitch参数的设置
+- 变调不变速
+  - setPitch(double newPitch)
+  - setPitchOctaves(double newPitch) 
+  - setPitchSemiTones(double or int newPitch) 
+- 变速不变调
+  - setRate(double newRate) 
+  - setRateChange(double newRate) 
+  - setTempo(double newTempo) 
+  - setTempoChange(double newTempo) 在源tempo的基础上，以百分比设置新的tempo[-50,100]
 
 ### SoundTouch实时处理音频流
 
