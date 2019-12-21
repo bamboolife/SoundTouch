@@ -124,11 +124,11 @@ add_library(
 
 ### A/D转换（Analog-to-Digital Converter）
 样本sample：声波
-→ 采样sampling
-→ 量化quantization：将连续值离散化
-→ 编码coding：可由软件或硬件芯片完成
-→ （压缩compress）：mp3等格式
-→ 二进制1010…10
+<br>→ 采样sampling
+<br>→ 量化quantization：将连续值离散化
+<br>→ 编码coding：可由软件或硬件芯片完成
+<br>→ （压缩compress）：mp3等格式
+<br>→ 二进制1010…10
 
 ### 声音采集
 将模拟信号数字化，分为取样和量化两部分，即通常的 PCM(Pulse-code modulation) 脉冲编码调制技术。
