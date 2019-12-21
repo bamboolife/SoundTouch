@@ -129,6 +129,7 @@ add_library(
 <br>→ 编码coding：可由软件或硬件芯片完成
 <br>→ （压缩compress）：mp3等格式
 <br>→ 二进制1010…10
+
 整个流程如下图
 ![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/sampler.png)
 ### 声音采集
