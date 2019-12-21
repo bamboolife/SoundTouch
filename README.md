@@ -129,7 +129,8 @@ add_library(
 <br>→ 编码coding：可由软件或硬件芯片完成
 <br>→ （压缩compress）：mp3等格式
 <br>→ 二进制1010…10
-
+整个流程如下图
+![image](https://github.com/bamboolife/SoundTouch/blob/master/imgs/sampler.png)
 ### 声音采集
 将模拟信号数字化，分为取样和量化两部分，即通常的 PCM(Pulse-code modulation) 脉冲编码调制技术。
 
